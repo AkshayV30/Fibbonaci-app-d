@@ -6,14 +6,14 @@ services:
       - POSTGRES_PASSWORD=postgres_password
   redis:
     image: 'redis:6.2.10'
-  server:
+  nginx:
+    depends_on:
+      - api
+      - react-app
     restart: always
     build:
       dockerfile: Dockerfile.dev
       context: ./nginx
-    depends_on:
-      - api
-      - react-app
     ports:
       - '3050:80'
   api:
