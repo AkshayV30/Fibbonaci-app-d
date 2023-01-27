@@ -11,6 +11,9 @@ services:
     build:
       dockerfile: Dockerfile.dev
       context: ./nginx
+    depends_on:
+      - api
+      - react-app
     ports:
       - '3050:80'
   api:
@@ -28,7 +31,7 @@ services:
       - PGDATABASE=postgres
       - PGPASSWORD=postgres_password
       - PGPORT=5432
-  fibbonaci-app:
+  react-app:
     build:
       dockerfile: Dockerfile.dev
       context: ./fibbonaci-app
