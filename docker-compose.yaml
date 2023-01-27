@@ -1,11 +1,11 @@
 version: '3'
 services:
   postgres:
-    image: 'postgres:14.6'
+    image: 'postgres:latest'
     environment:
       - POSTGRES_PASSWORD=postgres_password
   redis:
-    image: 'redis:6.2.10'
+    image: 'redis:latest'
   nginx:
     depends_on:
       - api
@@ -32,6 +32,8 @@ services:
       - PGPASSWORD=postgres_password
       - PGPORT=5432
   client:
+    environment:
+      - WDS_SOCKET_PORT=0
     build:
       dockerfile: Dockerfile.dev
       context: ./client
