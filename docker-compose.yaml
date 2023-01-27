@@ -9,7 +9,7 @@ services:
   nginx:
     depends_on:
       - api
-      - client
+      - fib-app
     restart: always
     build:
       dockerfile: Dockerfile.dev
@@ -31,15 +31,15 @@ services:
       - PGDATABASE=postgres
       - PGPASSWORD=postgres_password
       - PGPORT=5432
-  client:
+  fib-app:
     environment:
       - WDS_SOCKET_PORT=0
     build:
       dockerfile: Dockerfile.dev
-      context: ./client
+      context: ./fib-app
     volumes:
       - /app/node_modules
-      - ./client:/app
+      - ./fib-app:/app
   worker:
     build:
       dockerfile: Dockerfile.dev
